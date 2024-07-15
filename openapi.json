@@ -1,0 +1,2601 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HSL backend",
+    "description": "Como executar a api de forma local",
+    "contact": {
+      "email": "alvino.barboza@youcast.tv.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://hsl-development.uc.r.appspot.com",
+      "description": ""
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/getToken": {
+      "get": {
+        "summary": "Gera o token de seguranca ",
+        "description": "rota para gerar o token de seguranca",
+        "tags": ["Token"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " example of response ": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTU2MjAwMjgsImV4cCI6MTcxNTYyMzYyOH0.0Z01N-2Iy4ukMsxs-Gkow-L1re4giDUY1B3MbGScfT4"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getCsmsId": {
+      "post": {
+        "summary": " Consulta o ID do usuario no CSMS",
+        "description": "consulta o ID do usuario no CSMS",
+        "tags": ["Id do usuario no csms"],
+        "security": [{ "tokenAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_do_usuario_no_csms"
+              },
+
+              "examples": {
+                "login and password": {
+                  "value": {
+                    "login": "valiant.test",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "userId": {
+                    "value": {
+                      "id": 1399262,
+                      "customers_token": "b3nhno58dk8x5q5s5hydavga1ionasmbrjy35srv"
+                    }
+                  }
+                }
+              }
+            }
+          },
+
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Incorrect login or password ": {
+                    "value": {
+                      "message": "Incorrect credentials"
+                    }
+                  },
+                  "No Token Provided": {
+                    "summary": "Token não fornecido",
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/gethomepage/{profilesId}": {
+      "get": {
+        "summary": "Buscar midias da homepage",
+        "description": "Buscas midias da homepage",
+        "tags": ["Buscar midias da homepage"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [
+                        {
+                          "id": 6820,
+                          "type": "playlist",
+                          "style": "large_wide",
+                          "title": "Olá, VALIANT!",
+                          "data": [
+                            {
+                              "id": 15259,
+                              "type": "VOD",
+                              "title": "Boas Vindas - Hospital Sírio Libanês",
+                              "subtitle": null,
+                              "description": "",
+                              "follow": null,
+                              "duration": 220,
+                              "rating": 0,
+                              "released": null,
+                              "origin": "",
+                              "removable": 0,
+                              "image": "https://mw.yplay.com.br/assets/vods/2023/10/20/7/vods-6532d53f00139.png",
+                              "image_width": 461,
+                              "image_height": 615,
+                              "image_widescreen": "https://mw.yplay.com.br/assets/vods_widescreen/2023/10/20/13/vods_widescreen-6532df3ecc52d.png",
+                              "image_widescreen_width": 461,
+                              "image_widescreen_height": 261,
+                              "name_image": null,
+                              "name_image_width": null,
+                              "name_image_height": null,
+                              "locked": 0,
+                              "order": 0,
+                              "episode": null,
+                              "genres": "HSL VODs",
+                              "actors": null,
+                              "directors": null,
+                              "score": null,
+                              "reminder": null,
+                              "preferred_offset": null,
+                              "playable": null,
+                              "categories_id": null,
+                              "categories_name": null,
+                              "external_id": null,
+                              "youtube_id": null,
+                              "expiration": null,
+                              "imdb_rating": null,
+                              "imdb_id": null,
+                              "season_number": null,
+                              "episode_number": null,
+                              "hot_news": null,
+                              "live_start": null,
+                              "_class": "RecommendationCardVodEntity"
+                            },
+                            {
+                              "id": 97832262,
+                              "type": "TV",
+                              "title": "Reforma radical",
+                              "subtitle": "Eventos no celeiro",
+                              "description": "Jay Chaiken viaja para uma fazenda em Bedford, Indiana, para transformar um celeiro em um charmoso espaço de eventos. Com seu talento para a restauração, o celeiro revive seus dias de glória.",
+                              "follow": null,
+                              "duration": 2880,
+                              "rating": 0,
+                              "released": null,
+                              "origin": null,
+                              "removable": 0,
+                              "image": "https://mw.yplay.com.br/assets/epg_events/2023/12/06/20/epg_events-657038cf765b5.png",
+                              "image_width": 468,
+                              "image_height": 624,
+                              "image_widescreen": "https://mw.yplay.com.br/assets/epg_events/2023/12/06/48/epg_events-657038cfb889f.png",
+                              "image_widescreen_width": 1300,
+                              "image_widescreen_height": 731,
+                              "name_image": null,
+                              "name_image_width": null,
+                              "name_image_height": null,
+                              "locked": 0,
+                              "order": 29,
+                              "episode": "S1E6",
+                              "genres": "Séries, Documentário",
+                              "actors": "Jay Chaikin",
+                              "directors": null,
+                              "score": 113,
+                              "reminder": null,
+                              "preferred_offset": null,
+                              "playable": null,
+                              "categories_id": null,
+                              "categories_name": null,
+                              "external_id": null,
+                              "youtube_id": null,
+                              "expiration": null,
+                              "imdb_rating": null,
+                              "imdb_id": null,
+                              "season_number": 1,
+                              "episode_number": 6,
+                              "channels_id": 135,
+                              "channels_name": "DISCOVERY WORLD HD",
+                              "channels_forced_pin": 0,
+                              "channels_logo": "https://mw.yplay.com.br/assets/channels/2020/12/09/19/channels_135-5fd11927efdf7.png",
+                              "channels_logo_widescreen": null,
+                              "start": "2024-05-06T20:00:00-03:00",
+                              "end": "2024-05-06T20:48:00-03:00",
+                              "_class": "RecommendationCardEventEntity"
+                            }
+                          ],
+                          "focus": null,
+                          "type_of_view": null,
+                          "background_image": null,
+                          "number_style": null,
+                          "_class": "RecommendationRowEntity"
+                        }
+                      ],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getSubscribedChannels/{profilesId}": {
+      "get": {
+        "summary": "Buscar canais liberados para o usuario",
+        "description": "Buscar canais liberados para o usuario",
+        "tags": ["Buscar canais liberados para o usuario"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [
+                        {
+                          "channels_id": 333,
+                          "channels_name": "Canal do Paciente  HSL (SP)",
+                          "channels_type": "channel",
+                          "channels_order": 0,
+                          "channels_rating": 0,
+                          "channels_forced_pin": 0,
+                          "channels_categories": [],
+                          "channels_logo": "https://mw.yplay.com.br/assets/channels/2021/06/10/17/channels_333-60c224e9c2b27.png",
+                          "channels_logo_widescreen": null,
+                          "channels_number": 0,
+                          "channels_recording_length": 5760,
+                          "channels_live_length": 250,
+                          "channels_locked": 0,
+                          "customers_recording_length": 5760,
+                          "ucast": true,
+                          "mcast": false,
+                          "bcast": false,
+                          "allowed_recordings": true,
+                          "_class": "SubscribedChannelEntity"
+                        },
+                        {
+                          "channels_id": 525,
+                          "channels_name": "Trilha Sonora",
+                          "channels_type": "radio",
+                          "channels_order": 10079,
+                          "channels_rating": 0,
+                          "channels_forced_pin": 0,
+                          "channels_categories": [13],
+                          "channels_logo": "https://mw.yplay.com.br/assets/channels/2021/09/30/25/channels_525-6155d9b488509.png",
+                          "channels_logo_widescreen": null,
+                          "channels_number": 10079,
+                          "channels_recording_length": 10080,
+                          "channels_live_length": 250,
+                          "channels_locked": 0,
+                          "customers_recording_length": 10080,
+                          "ucast": true,
+                          "mcast": false,
+                          "bcast": false,
+                          "allowed_recordings": true,
+                          "_class": "SubscribedChannelEntity"
+                        }
+                      ],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getChannelByCategory/{profilesId}": {
+      "get": {
+        "summary": "Buscar canais por categoria",
+        "description": "Buscar canais por categoria",
+        "tags": ["Buscar canais por categoria"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [
+                        {
+                          "channels_categories_id": 1,
+                          "channels_categories_name": "Aberto",
+                          "channels_categories_description": "",
+                          "channels_categories_image": null,
+                          "channels_categories_active": 1,
+                          "channels_categories_order": 0,
+                          "order": 0,
+                          "channels": [5, 29, 52, 54],
+                          "_class": "ChannelCategoryEntity"
+                        },
+                        {
+                          "channels_categories_id": 4294967294,
+                          "channels_categories_name": "Favoritos",
+                          "channels_categories_description": "",
+                          "channels_categories_image": null,
+                          "channels_categories_active": 1,
+                          "channels_categories_order": 0,
+                          "order": -1,
+                          "channels": [],
+                          "_class": "ChannelCategoryEntity"
+                        }
+                      ],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getStreamUrl": {
+      "get": {
+        "summary": "Obter URL do Stream",
+        "description": "Obter URL do Stream para um determinado perfil e mídia",
+        "tags": ["Busca a url de streaming do canal e midias"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "mediaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID da mídia",
+            "example": "2065"
+          },
+          {
+            "in": "query",
+            "name": "profilesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 155,
+                      "type": "live",
+                      "url": "https://ts1-edge.youcast.tv.br/s-yplay-mini05/channels/live/globo-hd-sp8khu040qqh-155-3797/globo-hd-sp-155-3797-cenc.mpd",
+                      "thumbnails_url": "https://ts1-edge.youcast.tv.br/s-yplay-mini05/channels/live/globo-hd-sp8khu040qqh-155-3797/thumbnails/",
+                      "offset": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getPreviewUrl": {
+      "get": {
+        "summary": "Busca a url de preview do canal",
+        "description": "Busca a url de preview do canal",
+        "tags": ["Busca a url de preview do canal"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "channelsId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Preview da midia",
+            "examples": {
+              "example1": {
+                "value": "2065",
+                "summary": "Exemplo de VOD"
+              },
+              "example2": {
+                "value": "155",
+                "summary": "Exemplo de Channel"
+              },
+              "example3": {
+                "value": "125560416",
+                "summary": "Exemplo de TV"
+              },
+              "example4": {
+                "value": "TESTE",
+                "summary": "Exemplo de Recording"
+              }
+            }
+          },
+
+          {
+            "in": "query",
+            "name": "profilesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          },
+
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "example1": {
+                "value": "VOD",
+                "summary": "Tipo de Midia VOD"
+              },
+              "example2": {
+                "value": "Channel",
+                "summary": "Tipo de Midia Channel"
+              },
+              "example3": {
+                "value": "TV",
+                "summary": "Tipo de Midia TV"
+              },
+              "example4": {
+                "value": "Recording",
+                "summary": "Tipo de Midia Recording"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 155,
+                      "type": "live",
+                      "url": "https://ts1-edge.youcast.tv.br/s-yplay-mini05/channels/live/globo-hd-spj24vl08squ-155-3797/globo-hd-sp-155-3797-cenc.mpd",
+                      "thumbnails_url": "https://ts1-edge.youcast.tv.br/s-yplay-mini05/channels/live/globo-hd-spj24vl08squ-155-3797/thumbnails/",
+                      "offset": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getfavoriteChannels/{profilesId}": {
+      "get": {
+        "summary": " Busca os canais favoritos do usuário",
+        "description": " Busca os canais favoritos do usuário",
+        "tags": [" Busca os canais favoritos do usuário"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [161, 333],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+                  "missing item in body": {
+                    "value": {
+                      "message": "Missing required field in the body: channelsId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/addFavoriteChannel": {
+      "put": {
+        "summary": "Adiciona os canais favoritos do usuario",
+        "description": "Adiciona os canais favoritos do usuario",
+        "tags": ["Adiciona os canais favoritos do usuario"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": 
+                  "#/components/schemas/adiciona_os_canais_favoritos_do_usuario"
+              
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "channelsId": "333",
+                    "profilesId": "1399262"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [161, 333],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+                  "missing item in body": {
+                    "value": {
+                      "message": "Missing required field in the body: channelsId"
+                    }
+                  },
+                  "adding duplicate channel": {
+                    "value": {
+                      "message": "Channel already exists in the favorites list"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": " Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding channel non-existent  the body": {
+                    "value": {
+                      "message": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/deleteFavoriteChannel": {
+      "delete": {
+        "summary": "Deleta canal dos favoritos do usuário",
+        "description": "Deleta canal dos favoritos do usuário",
+        "tags": ["Deleta canal dos favoritos do usuário"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deleta_canal_dos_favoritos_do_usuario"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "channelsId": "333",
+                    "profilesId": "1399262"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+                  "missing item in body": {
+                    "value": {
+                      "message": "Missing required field in the body: channelsId"
+                    }
+                  },
+                  "deleting already deleted or non-existent channel": {
+                    "value": {
+                      "message": "Channel don't exists in the favorites list"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/loginWithMac": {
+      "post": {
+        "summary": "Faz login pelo numero do Mac do STB",
+        "description": "Faz login pelo numero do Mac do STB",
+        "tags": ["login pelo mac do stb"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login_pelo_mac_do_stb"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "profilesId": "1399262",
+                    "macAddress": "D8365F3EE2AD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": {
+                        "customers_id": 3738463,
+                        "customers_vendors_id": 5,
+                        "customers_login": "valiant.test",
+                        "customers_created": "2024-02-07T10:45:48-03:00",
+                        "customers_users_id": 1,
+                        "customers_token": "b3nhno58dk8x5q5s5hydavga1ionasmbrjy35srv",
+                        "customers_profiles_id": 1399262,
+                        "customers_password_changed": 0,
+                        "customers_dvb_c_regions_id": null,
+                        "customers_dvb_s_regions_id": null,
+                        "customers_dvb_t_regions_id": null,
+                        "customers_dvb_t2_regions_id": null,
+                        "customers_device_count": 2,
+                        "customers_concurrent_device_count": 2,
+                        "customers_recording_length": 10080,
+                        "customers_recording_used": 0,
+                        "customers_autogenerated": 0,
+                        "profiles": [
+                          {
+                            "profiles_id": 1399262,
+                            "profiles_customers_id": 3738463,
+                            "profiles_name": "VALIANT",
+                            "profiles_image": "2024/02/07/50/profile_5037-65c3898c2e137.png",
+                            "profiles_birthday": null,
+                            "profiles_pin": null,
+                            "profiles_created": "2024-02-07T10:45:48-03:00",
+                            "profiles_protect": 0,
+                            "profiles_age": null,
+                            "profiles_pin_enabled": 1,
+                            "customers_login": "valiant.test",
+                            "customers_token": "b3nhno58dk8x5q5s5hydavga1ionasmbrjy35srv",
+                            "customers_vendors_id": 5,
+                            "image": "https://mw.yplay.com.br/public/profile/image/1399262/b3nhno58dk8x5q5s5hydavga1ionasmbrjy35srv/profile_5037-65c3898c2e137.png",
+                            "profiles_login_requires_pin": 1,
+                            "vendors_multicast_unicast_fallback": 3,
+                            "vendors_push_reminders": 0,
+                            "vendors_channel_list_reindex_order": 0,
+                            "profiles_used": "2024-05-15T17:10:02-03:00",
+                            "channels_whitelisting": [],
+                            "_class": "ProfileEntity"
+                          }
+                        ],
+                        "customers_recommendation_engine_enabled": true,
+                        "customers_recording_by_profile": {
+                          "1399262": 0
+                        },
+                        "_class": "CustomerEntity"
+                      },
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId or macAddress incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+                  "missing item in body": {
+                    "value": {
+                      "message": "Missing required field in the body: channelsId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/addToMyList": {
+      "put": {
+        "summary": "Adicionar a lista ",
+        "description": "Adicionar a lista",
+        "tags": ["Lista de Midias"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lista_de_midias"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "profilesId": "1399262",
+                    "channelsId": "13199",
+                    "mediaType": "VOD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": true,
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "something incorrect in the body": {
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+
+                  "missing some kind of key in the body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "inserting duplicate item in the media list": {
+                    "value": {
+                      "message": "Channel already exists in the list"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getMyList/{profilesId}": {
+      "get": {
+        "summary": "Buscar midias",
+        "description": "Buscar midias",
+        "tags": ["Lista de midias"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [
+                        {
+                          "id": 13199,
+                          "type": "VOD",
+                          "title": null,
+                          "subtitle": null,
+                          "description": null,
+                          "follow": null,
+                          "duration": null,
+                          "rating": null,
+                          "released": null,
+                          "origin": null,
+                          "removable": null,
+                          "image_widescreen": null,
+                          "image_widescreen_width": null,
+                          "image_widescreen_height": null,
+                          "name_image": null,
+                          "name_image_width": null,
+                          "name_image_height": null,
+                          "locked": null,
+                          "order": null,
+                          "episode": null,
+                          "genres": null,
+                          "actors": null,
+                          "directors": null,
+                          "score": null,
+                          "reminder": null,
+                          "preferred_offset": null,
+                          "playable": null,
+                          "categories_id": null,
+                          "categories_name": null,
+                          "external_id": null,
+                          "youtube_id": null,
+                          "expiration": null,
+                          "imdb_rating": null,
+                          "imdb_id": null,
+                          "season_number": null,
+                          "episode_number": null,
+                          "_class": "RecommendationCardEntity"
+                        }
+                      ],
+                      "status": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "list with fake id in the url": {
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "list without the id URL": {
+                    "value": {
+                      "message": "The required parameter 'profilesId' was not provided. The correct thing is to insert {BASE_URL}/getMyList/{profilesId}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/deleteFromList": {
+      "delete": {
+        "summary": "Deletar item da lista de Midias ",
+        "description": "Deletar item da Lista de Midias ",
+        "tags": ["Lista de midias"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lista_de_midias"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "profilesId": "1399262",
+                    "channelsId": "13199",
+                    "mediaType": "VOD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: Id"
+                    }
+                  },
+
+                  "missing some kind of key in the body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "delete already deleted media or non-existent media": {
+                    "value": {
+                      "message": "Channel not found in the list"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "something incorrect in the body": {
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getCsmsIdWithToken/{customersToken}": {
+      "get": {
+        "summary": "Login pelo custumers token",
+        "description": "Login pelo custumers token",
+        "tags": ["Login feito pelo customers token"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "customersToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Custumers exemplo: gerado pelo seguinte endpoint /getCsmsId",
+            "example": "b3nhno58dk8x5q5s5hydavga1ionasmbrjy35srv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 1399262
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "list with fake id in the url": {
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "list without the id URL": {
+                    "value": {
+                      "message": "The required parameter 'customersToken' was not provided. The correct thing is to insert {BASE_URL}/getMyList/{customersToken}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/addRecordings": {
+      "put": {
+        "summary": "Adicionar gravação ",
+        "description": "Adicionar gravação: epgEventsId gerado no endpoint /getUpdatedEvents como id do evento ",
+        "tags": ["Gravação"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/gravacao"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "profilesId": "1399262",
+                    "epgEventsId": 122226242
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Recording successfully added"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "something incorrect in the body": {
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: channelsId"
+                    }
+                  },
+
+                  "missing some kind of key in the body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "inserting duplicate item in the media list": {
+                    "value": {
+                      "message": "This epgEventsId already exists in the recordings list"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/deleteRecordings": {
+      "delete": {
+        "summary": "Deletar Gravação ",
+        "description": "Deletar Gravação ",
+        "tags": ["Gravação"],
+        "security": [{ "tokenAuth": [] }],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/gravacao"
+              },
+              "examples": {
+                "body": {
+                  "value": {
+                    "profilesId": "1399262",
+                    "epgEventsId": 122226242
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: Id"
+                    }
+                  },
+
+                  "missing some kind of key in the body": {
+                    "value": {
+                      "message": "Missing required field: {name of required}"
+                    }
+                  },
+                  "delete Recording already deleted or Non-existent recording": {
+                    "value": {
+                      "message": "This epgEventsId don't exists in the recordings list"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "something incorrect in the body": {
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "error": {
+                          "code": 103,
+                          "message": "incorrect credentials"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getRecordings": {
+      "get": {
+        "summary": "Buscar gravação",
+        "description": "Busca a gravação dos programas ",
+        "tags": ["Gravação"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "profilesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "response": [
+                        {
+                          "id": 124648881,
+                          "type": "TV",
+                          "title": "Ed Stafford: contra todos",
+                          "subtitle": "Mongólia",
+                          "description": "A Mongólia é o cenário do novo desafio de Ed Stafford, onde compete contra o especialista em sobrevivência Matt Graham. No Deserto de Gobi, ele enfrenta uma tempestade de gelo e a desidratação extrema para vencer seu adversário.",
+                          "follow": null,
+                          "duration": 3360,
+                          "rating": 14,
+                          "released": null,
+                          "origin": null,
+                          "removable": null,
+                          "image": "https://mw.yplay.com.br/assets/epg_events/2024/05/10/0/epg_events-663de2443ebf4.png",
+                          "image_width": 468,
+                          "image_height": 624,
+                          "image_widescreen": "https://mw.yplay.com.br/assets/epg_events/2024/05/10/20/epg_events-663de24541777.png",
+                          "image_widescreen_width": 1300,
+                          "image_widescreen_height": 731,
+                          "name_image": null,
+                          "name_image_width": null,
+                          "name_image_height": null,
+                          "locked": null,
+                          "order": null,
+                          "episode": "S1E3",
+                          "genres": "Reality Show",
+                          "actors": "Ed Stafford",
+                          "directors": null,
+                          "score": null,
+                          "reminder": null,
+                          "preferred_offset": null,
+                          "playable": null,
+                          "categories_id": null,
+                          "categories_name": null,
+                          "external_id": null,
+                          "youtube_id": null,
+                          "expiration": null,
+                          "imdb_rating": null,
+                          "imdb_id": null,
+                          "season_number": 1,
+                          "episode_number": 3,
+                          "channels_id": 7,
+                          "channels_name": "DISCOVERY CHANNEL HD",
+                          "channels_forced_pin": null,
+                          "channels_logo": "https://mw.yplay.com.br/assets/channels/2020/11/26/11/channels_7-5fbfec2a0d9d3.png",
+                          "start": "2024-06-20T10:18:00-03:00",
+                          "end": "2024-06-20T11:14:00-03:00",
+                          "_class": "RecommendationCardEventEntity"
+                        },
+                        {
+                          "id": 123629181,
+                          "type": "TV",
+                          "title": "Estate in diretta",
+                          "subtitle": null,
+                          "description": "Atualidades, crônicas, entrevistas e espetáculos são apresentados neste segmento que expõe as notícias mais destacadas do dia a nível nacional e internacional, em uma mistura de informação e entretenimento.",
+                          "follow": null,
+                          "duration": 8100,
+                          "rating": 14,
+                          "released": null,
+                          "origin": null,
+                          "removable": null,
+                          "image": "https://mw.yplay.com.br/assets/epg_events/2024/05/31/37/epg_events-6659a0d445a43.png",
+                          "image_width": 975,
+                          "image_height": 1300,
+                          "image_widescreen": null,
+                          "image_widescreen_width": null,
+                          "image_widescreen_height": null,
+                          "name_image": null,
+                          "name_image_width": null,
+                          "name_image_height": null,
+                          "locked": null,
+                          "order": null,
+                          "episode": null,
+                          "genres": "Notícias, Interesse geral",
+                          "actors": "Gianluca Semprini, Roberta Capua",
+                          "directors": null,
+                          "score": null,
+                          "reminder": null,
+                          "preferred_offset": null,
+                          "playable": null,
+                          "categories_id": null,
+                          "categories_name": null,
+                          "external_id": null,
+                          "youtube_id": null,
+                          "expiration": null,
+                          "imdb_rating": null,
+                          "imdb_id": null,
+                          "season_number": null,
+                          "episode_number": null,
+                          "channels_id": 2521,
+                          "channels_name": "RAI",
+                          "channels_forced_pin": null,
+                          "channels_logo": "https://mw.yplay.com.br/assets/channels/2023/09/29/4/channels-65171a3661173.png",
+                          "start": "2024-06-21T12:45:00-03:00",
+                          "end": "2024-06-21T15:00:00-03:00",
+                          "_class": "RecommendationCardEventEntity"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/getUpdatedEvents": {
+      "get": {
+        "summary": "Busca a programação do canal ou canais",
+        "description": "Busca a programação, como a proxima ",
+        "tags": ["Buscar eventos atualizados"],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "profilesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          },
+          {
+            "in": "query",
+            "name": "channelsId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do canal",
+            "example": "155"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": [123521156, 124302563]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "message": "incorrect credentials"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Missing required field in the body: {field}"
+                    }
+                  },
+                  "adding non-existent item to the body": {
+                    "value": {
+                      "message": "The following fields are not allowed: {field}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " missing data in the request body": {
+                    "value": {
+                      "message": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getMovies/{profilesId}": {
+      "get": {
+        "summary": "Buscar filmes e categorias ",
+        "description": "Buscar filmes e categorias ",
+        "tags": ["Buscar filmes e categorias "],
+        "security": [{ "tokenAuth": [] }],
+        "parameters": [
+          {
+            "name": "profilesId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do usuario",
+            "example": "1399262"
+          },
+          {
+            "in": "query",
+            "name": "returnLink",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Define se o link deve ser retornado ou não",
+            "examples": {
+              "example1": {
+                "value": true,
+                "summary": " Retorno  do VOD com a URL de reprodução "
+              },
+              "example2": {
+                "value": false,
+                "summary": "Retorno  do VOD sem URL de reprodução"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 356,
+                        "title": "Variedades",
+                        "data": [
+                          {
+                            "id": 2065,
+                            "type": "VOD",
+                            "title": "8 Dias",
+                            "description": "Carlo, foi pego de surpresa na grande recessão de 2008, e ele está prestes a perder a sua casa e tenta evitar de toda maneira que sua família vá para a rua.\n",
+                            "duration": 5453,
+                            "rating": 16,
+                            "released": "2016",
+                            "actors": null,
+                            "directors": null,
+                            "image": "https://mw.yplay.com.br/assets/vods/2021/04/22/8/vods_2065-6081dda4720cf.png",
+                            "image_width": 600,
+                            "image_height": 882,
+                            "image_widescreen": "https://mw.yplay.com.br/assets/vods_widescreen/2024/02/07/42/vods_widescreen-65c3be4f56483.png",
+                            "image_widescreen_width": 1280,
+                            "image_widescreen_height": 720,
+                            "mediaMpd": "https://ts6-edge.tcm10.com.br/s-yplay-mini06/vods/20/407-o-voo-das-trevas-copy-2065/61b9e490913de-2065-mp4-cenc.mpd"
+                          },
+                          {
+                            "id": 6480,
+                            "type": "VOD",
+                            "title": "Vingança Sangrenta",
+                            "description": "Jenny Bilson é uma estudante com notas perfeitas e um futuro brilhante. Ela está tentando deixar uma tragédia do passado, e seguir em frente com sua vida. Junto com seu namorado Mike, e alguns outros amigos da escola eles decidem abandonar a escola por um dia. Mas isso acaba sendo um erro terrível quando Jenny percebe que seu passado está prestes a alcançá-la e está trazendo todo o terror novamente. Ela e seus amigos terão que escapar deste massacre.\n",
+                            "duration": 4746,
+                            "rating": 16,
+                            "released": "2016",
+                            "actors": null,
+                            "directors": null,
+                            "image": "https://mw.yplay.com.br/assets/vods/2024/03/12/12/vods-65f08a82d275e.png",
+                            "image_width": 1200,
+                            "image_height": 1600,
+                            "image_widescreen": "https://mw.yplay.com.br/assets/vods_widescreen/2024/03/12/47/vods_widescreen-65f08a82d6e9f.png",
+                            "image_widescreen_width": 1920,
+                            "image_widescreen_height": 1080,
+                            "mediaMpd": "https://ts1-edge.youcast.tv.br/s-yplay-mini02/vods/64/vigilantes-da-guerra-copy-6480/61670d2759ee5-6480-mp4-cenc.mpd"
+                          }
+                        ]
+                      },
+                      {
+                        "id": 459,
+                        "title": "Publicidade",
+                        "data": [
+                          {
+                            "id": 156,
+                            "type": "VOD",
+                            "title": "Testei a nova LG NanoCell",
+                            "description": "Gente, já pensou em conversar com a sua própria TV? Pois é, hoje eu mostro pra vocês como dá pra fazer isso e muito mais com esse unboxing da TV NanoCell da LG!",
+                            "duration": 264,
+                            "rating": 0,
+                            "released": null,
+                            "actors": null,
+                            "directors": null,
+                            "image": "https://mw.yplay.com.br/assets/vods/2021/01/29/17/vods_156-60146ffc24c5c.png",
+                            "image_width": 638,
+                            "image_height": 857,
+                            "image_widescreen": null,
+                            "image_widescreen_width": null,
+                            "image_widescreen_height": null,
+                            "mediaMpd": "https://edge1.tcm10.com.br/s-yplay-mini01/vods/1/testei-a-nova-tv-nanocell-da-lg-o-que-eu-achei-156/testei-a-nova-tv-nanocell-da-lg-o-que-eu-achei-unboxing-canal-da-lu-magalu-1-mp4.mpd"
+                          },
+                          {
+                            "id": 152,
+                            "type": "VOD",
+                            "title": "Testei a nova TV NanoCell da LG! O que eu achei?",
+                            "description": "Gente, já pensou em conversar com a sua própria TV? Pois é, hoje eu mostro pra vocês como dá pra fazer isso e muito mais com esse unboxing da TV NanoCell da LG!",
+                            "duration": 264,
+                            "rating": 0,
+                            "released": null,
+                            "actors": null,
+                            "directors": null,
+                            "image": "https://mw.yplay.com.br/assets/vods/2021/01/28/27/vods_152-6012c1f9a878c.png",
+                            "image_width": 638,
+                            "image_height": 857,
+                            "image_widescreen": null,
+                            "image_widescreen_width": null,
+                            "image_widescreen_height": null,
+                            "mediaMpd": "https://edge4.yplay.com.br/s-yplay-mini06/vods/1/my-dream-terraco-copy-152/testei-a-nova-tv-nanocell-da-lg-o-que-eu-achei-unboxing-canal-da-lu-magalu-1-mp4.mpd"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "No Token Provided": {
+                    "value": {
+                      "message": "Token not provided"
+                    }
+                  },
+                  "profilesId incorrect": {
+                    "summary": "profilesId incorrect",
+                    "value": {
+                      "error": {
+                        "code": 103,
+                        "message": "incorrect credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  " Incorrect Token": {
+                    "value": {
+                      "message": "Token authentication failed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing some queryParam": {
+                    "value": {
+                      "message": "Missing required parameter: {name query Param}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "securitySchemes": {
+      "tokenAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+
+    "schemas": {
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+
+      "id_do_usuario_no_csms": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "buscar_midias_da_homepage": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "buscar_canais_liberados_para_o_user": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "buscar_canais_por_categoria": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "busca_a_url_de_streaming_do_canal": {
+        "type": "object",
+        "properties": {
+          "channelsId": {
+            "type": "string"
+          },
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "busca_a_url_de_preview_do_canal": {
+        "type": "object",
+        "properties": {
+          "channelsId": {
+            "type": "string"
+          },
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "adiciona_os_canais_favoritos_do_usuario": {
+        "type": "object",
+        "properties": {
+          "channelsId": {
+            "type": "string"
+          },
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "busca_os_canais_favoritos_do_usuario": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "deleta_canal_dos_favoritos_do_usuario": {
+        "type": "object",
+        "properties": {
+          "channelsId": {
+            "type": "string"
+          },
+          "profilesId": {
+            "type": "string"
+          }
+        }
+      },
+      "login_pelo_mac_do_stb": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          },
+          "macAddress": {
+            "type": "string"
+          }
+        }
+      },
+      "lista_de_midias": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          },
+          "channelsId": {
+            "type": "string"
+          },
+          "mediaType": {
+            "type": "string"
+          }
+        }
+      },
+      "gravacao": {
+        "type": "object",
+        "properties": {
+          "profilesId": {
+            "type": "string"
+          },
+          "epgEventsId": {
+            "type": "integer"
+          }
+        },
+        "required": ["profilesId", "epgEventsId"]
+      }
+    }
+  }
+}
